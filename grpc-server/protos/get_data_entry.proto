@@ -8,10 +8,10 @@ service DataEntryGetter {
 
 message GetDataEntryRequest {
     string dataset_id = 1;
-    string entry_id = 2;
 }
 
 message GetDataEntryResponse {
     string data_type = 1;
     string data = 2;
+    string entry_id = 3;
 }
