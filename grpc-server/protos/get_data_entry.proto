@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package get_data;
+
+service DataEntryGetter {
+    rpc GetDataEntry(GetDataEntryRequest) returns (GetDataEntryResponse);
+}
+
+message GetDataEntryRequest {
+    string dataset_id = 1;
+    string entry_id = 2;
+}
+
+message GetDataEntryResponse {
+    string data_type = 1;
+    string data = 2;
+}
