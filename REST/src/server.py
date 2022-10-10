@@ -52,7 +52,7 @@ async def login_user(request: LoginUserSchema):
     if user:
         hashed_password = user["password"]
         if verify_password(plain_password, hashed_password):
-            return {"token": create_access_token({"email": user["email"], "user_id": user["user_id"]})}
+            return {"token": create_access_token({"email": user["email"], "user_id": user["user_id"]}), "token_type": "BEARER"}
     raise HTTPException(status_code=400, detail="User or Password incorrect")
 
 

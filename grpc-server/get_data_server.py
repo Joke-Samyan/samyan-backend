@@ -25,14 +25,17 @@ def find_unlabel_entry(dataset_id):
 
 class GetDataEntryServicer(get_data_entry_pb2_grpc.DataEntryGetterServicer):
     def GetDataEntry(self, request, context):
+        print(request)
         response = get_data_entry_pb2.GetDataEntryResponse()
         entry = find_unlabel_entry(request.dataset_id)
+        print(entry)
         if entry:
             response.data_type = entry["entry_type"]
             response.data = entry["entry"]
+            response.entry_id = str(entry["entry_id"])
+            response.reward = entry["reward"]
         else:
-            response.data_type = "ALL_LABELED"
-            response.data = "ALL_LABELED"
+            raise Exception("ALL ENTRIES IN THIS DATASET WERE LABELED")
         return response
 
 
