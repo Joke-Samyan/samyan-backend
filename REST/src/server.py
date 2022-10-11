@@ -1,5 +1,6 @@
 import bson
 from fastapi import FastAPI, APIRouter, Request, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from src.schema import CreateUserSchema, LoginUserSchema, DatasetSchema, AnnotateSchema
 from src.utils import get_password_hash, verify_password, create_access_token
 from src.database import (
@@ -16,7 +17,13 @@ from src.database import (
 
 
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():
