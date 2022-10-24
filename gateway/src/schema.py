@@ -34,3 +34,6 @@ class AnnotateSchema(BaseModel):
     entry_id: str
     labeler_id: str
     label: str
+
+class PrelabelImageSchema(BaseModel):
+    url: str

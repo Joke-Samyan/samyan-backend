@@ -21,9 +21,7 @@ def main():
 
     def callback(ch, method, properties, body):
         print(" [x] Received %r" % json.loads(body)["file_name"])
-        jpg_original = base64.b64decode(json.loads(body)["image"])
-        jpg_as_np = np.frombuffer(jpg_original, dtype=np.uint8)
-        image = cv2.imdecode(jpg_as_np, flags=1)
+        image = decode_jpg_from_string(json.loads(body)["image"])
         print("prediction result:", model.predict(image))
 
         # cv2.imshow("image", image)
