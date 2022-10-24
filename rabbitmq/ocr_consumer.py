@@ -4,20 +4,20 @@ import json
 import base64
 import numpy as np
 
-from models.image_classifier import ImageClassifier
+from models.ocr import OCR
 
-# initial image classifier model
-model = ImageClassifier()
+# initial ocr model
+model = OCR()
 
 def main():
     """
-    receive image from image classifier queue
+    receive image from ocr queue and recognize it
     """
 
     connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost"))
     channel = connection.channel()
 
-    channel.queue_declare(queue="image_classifier")
+    channel.queue_declare(queue="ocr")
 
     def callback(ch, method, properties, body):
         print(" [x] Received %r" % json.loads(body)["file_name"])
@@ -29,7 +29,7 @@ def main():
         # cv2.imshow("image", image)
         # cv2.waitKey(0) 
     
-    channel.basic_consume(queue="image_classifier", on_message_callback=callback, auto_ack=True)
+    channel.basic_consume(queue="ocr", on_message_callback=callback, auto_ack=True)
     
     print(" [*] Waiting for messages. To exit press CTRL+C")
     channel.start_consuming()
