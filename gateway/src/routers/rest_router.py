@@ -39,13 +39,18 @@ def create_dataset(request: DatasetSchema, user = Depends(validate_token)):
         for e in entries:
             entry = e["entry"]
             entry_id = e["entry_id"]
-            send_to_ocr_queue(entry, data["dataset_id"], entry_id)
+            entry_type = e["entry_type"]
+            if entry_type == "image":
+                send_to_image_classifier_queue(entry, data["dataset_id"], entry_id)
 
-    if prelabel == "IC":
+    if prelabel == "OCR":
         for e in entries:
             entry = e["entry"]
             entry_id = e["entry_id"]
-            send_to_image_classifier_queue(entry, data["dataset_id"], entry_id)
+            entry_type = e["entry_type"]
+            if entry_type == "image":
+                send_to_ocr_queue(entry, data["dataset_id"], entry_id)
+
 
     return r.json()
 
