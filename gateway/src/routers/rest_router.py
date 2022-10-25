@@ -35,7 +35,7 @@ def create_dataset(request: DatasetSchema, user = Depends(validate_token)):
     data = r.json()
     entries = data["entries"]
 
-    if prelabel == "OCR":
+    if prelabel == "IC":
         for e in entries:
             entry = e["entry"]
             entry_id = e["entry_id"]
