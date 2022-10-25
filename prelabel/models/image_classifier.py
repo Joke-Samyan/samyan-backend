@@ -1,5 +1,5 @@
 import random
-from ZSIC import ZeroShotImageClassification
+# from ZSIC import ZeroShotImageClassification
 import cv2
 from PIL import Image
 
