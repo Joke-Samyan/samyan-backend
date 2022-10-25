@@ -1,4 +1,4 @@
-import opencv as cv2
+import cv2
 import base64
 
 def decode_jpg_from_string(encoded_string):  
