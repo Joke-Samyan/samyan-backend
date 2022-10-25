@@ -55,12 +55,12 @@ def match_template(image, template):
 
 class OCR:
     def __init__(self):
-        # pass
-        self.custom_config = r'--oem 3 --psm 6'
+        pass
+        # self.custom_config = r'--oem 3 --psm 6'
 
     def predict(self, image):
-        return pytesseract.image_to_string(image, config=self.custom_config)
-        # return "meow" if random.random() < 0.5 else "bark"
+        # return pytesseract.image_to_string(image, config=self.custom_config)
+        return "meow" if random.random() < 0.5 else "bark"
 
 if __name__ == "__main__":
     model = OCR()

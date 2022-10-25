@@ -21,7 +21,7 @@ def main():
 
     channel.queue_declare(queue="ocr")
 
-    async def callback(ch, method, properties, body):
+    def callback(ch, method, properties, body):
         print(" [x] Received %r" % json.loads(body)["file_name"])
         image = decode_jpg_from_string(json.loads(body)["image"])
         print("prediction result:", model.predict(image))
@@ -31,7 +31,7 @@ def main():
         # cv2.imshow("image", image)
         # cv2.waitKey(0) 
     
-    channel.basic_consume(queue="ocr", on_message_callback=, auto_ack=True)
+    channel.basic_consume(queue="ocr", on_message_callback=callback, auto_ack=True)
     
     print(" [*] Waiting for messages. To exit press CTRL+C")
     channel.start_consuming()
