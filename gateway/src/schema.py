@@ -24,7 +24,7 @@ class Entry(BaseModel):
 
 class DatasetSchema(BaseModel):
     description: str
-    owner: str
+    # owner: str
     reward_dataset: float
     entries: List[Entry]
 
@@ -32,7 +32,7 @@ class DatasetSchema(BaseModel):
 class AnnotateSchema(BaseModel):
     dataset_id: str
     entry_id: str
-    labeler_id: str
+    # labeler_id: str
     label: str
 
 class PrelabelImageSchema(BaseModel):

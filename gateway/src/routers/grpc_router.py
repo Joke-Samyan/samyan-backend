@@ -1,10 +1,11 @@
 import json
 from webbrowser import get
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 import requests
 from dotenv import load_dotenv
 import os
 from src.schema import RequestEntrySchema
+from src.utils import validate_token
 import compile_protos.get_data_entry_pb2_grpc
 import compile_protos.get_data_entry_pb2
 import time
@@ -20,7 +21,7 @@ grpc_router = APIRouter(
 
 
 @grpc_router.get("/{dataset_id}")
-def request_data_entry(dataset_id: str):
+def request_data_entry(dataset_id: str, user = Depends(validate_token)):
     try:
         with grpc.insecure_channel("localhost:50051") as channel:
             stub = compile_protos.get_data_entry_pb2_grpc.DataEntryGetterStub(channel)
