@@ -6,7 +6,7 @@ from utils import encode_jpg_from_path, encode_jpg_from_array, read_img_from_url
 
 
 
-def send_to_image_classifier_queue(url, file_name="dog_demo.jpeg"):
+def send_to_image_classifier_queue(url, file_name="demo/dog_demo.jpeg"):
     """
     Send an image to the image classifier queue
     """
@@ -28,7 +28,7 @@ def send_to_image_classifier_queue(url, file_name="dog_demo.jpeg"):
 
     connection.close()
 
-def send_to_ocr_queue(url, file_name="dog_demo.jpeg"):
+def send_to_ocr_queue(url, file_name="demo/dog_demo.jpeg"):
     """
     Send an image to the ocr queue
     """
