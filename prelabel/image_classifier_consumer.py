@@ -3,6 +3,7 @@ import cv2
 import json
 import base64
 import numpy as np
+from PIL import Image
 
 from models.image_classifier import ImageClassifier
 
@@ -24,7 +25,8 @@ def main():
         jpg_original = base64.b64decode(json.loads(body)["image"])
         jpg_as_np = np.frombuffer(jpg_original, dtype=np.uint8)
         image = cv2.imdecode(jpg_as_np, flags=1)
-        print("prediction result:", model.predict(image))
+        pil_image = Image.fromarray(image)
+        print("prediction result:", model.predict(pil_image, candidate_labels=["dog", "cat"]))
 
         # cv2.imshow("image", image)
         # cv2.waitKey(0) 
@@ -43,3 +45,4 @@ if __name__ == "__main__":
             sys.exit(0)
         except SystemExit:
             os._exit(0)
+
