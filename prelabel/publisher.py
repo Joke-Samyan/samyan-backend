@@ -6,7 +6,7 @@ from utils import encode_jpg_from_path, encode_jpg_from_array, read_img_from_url
 
 
 
-def send_to_image_classifier_queue(file_name="dog_demo.jpeg", url):
+def send_to_image_classifier_queue(url, file_name="dog_demo.jpeg"):
     """
     Send an image to the image classifier queue
     """
@@ -28,11 +28,12 @@ def send_to_image_classifier_queue(file_name="dog_demo.jpeg", url):
 
     connection.close()
 
-def send_to_ocr_queue(image_path="./demo/dog_demo.jpeg", file_name="dog_demo.jpeg"):
+def send_to_ocr_queue(url, file_name="dog_demo.jpeg"):
     """
     Send an image to the ocr queue
     """
-    image = cv2.imread(image_path)
+    image = read_img_from_url(url)
+    encoded_image = encode_jpg_from_array(image)
     encoded_image = base64.b64encode(cv2.imencode(".jpg", image)[1]).decode()
 
     connection = pika.BlockingConnection(pika.ConnectionParameters("localhost"))

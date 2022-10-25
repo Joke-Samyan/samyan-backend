@@ -3,6 +3,7 @@ import cv2
 import json
 import base64
 import numpy as np
+from utils import decode_jpg_from_string
 
 from models.ocr import OCR
 
