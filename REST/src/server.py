@@ -96,7 +96,8 @@ async def create_dataset(request: DatasetSchema):
         temp["reward"] = reward_per_entry
         request["entries"][idx] = temp
     dataset = await add_dataset(request)
-    return {"ok": 1}
+    dataset = await find_dataset_by_id(dataset)
+    return dataset
 
 
 annotate_router = APIRouter(

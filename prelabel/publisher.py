@@ -53,8 +53,8 @@ def send_to_ocr_queue(url, file_name="demo/dog_demo.jpeg"):
 
 
 def main():
-    send_to_image_classifier_queue()
-    send_to_ocr_queue()
+    # send_to_image_classifier_queue()
+    send_to_ocr_queue("https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2@2x.png")
 
 
 if __name__ == "__main__":

@@ -38,13 +38,12 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 
 async def validate_token(http_authorization_credentials=Depends(reusable_oauth2)):
-    payload = jwt.decode(http_authorization_credentials.credentials,SECRET_KEY, algorithms=[ALGORITHM])
+    try:
+        payload = jwt.decode(http_authorization_credentials.credentials,SECRET_KEY, algorithms=[ALGORITHM])
+    except JWTError:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"Could not validate credentials",
+        )
     user = await find_user_by_email(payload["email"])
     return user
-    #     email = payload.get("email")
-    #     return find_user_by_email(email)
-    # except JWTError as e:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_403_FORBIDDEN,
-    #         detail=f"Could not validate credentials",
-    #     )

@@ -1,5 +1,7 @@
 import cv2
 import base64
+import urllib.request
+import numpy as np
 
 def decode_jpg_from_string(encoded_string):  
     jpg_original = base64.b64decode(encoded_string)

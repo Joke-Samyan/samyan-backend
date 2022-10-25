@@ -24,6 +24,7 @@ class Entry(BaseModel):
 
 class DatasetSchema(BaseModel):
     description: str
+    prelabel: str
     # owner: str
     reward_dataset: float
     entries: List[Entry]

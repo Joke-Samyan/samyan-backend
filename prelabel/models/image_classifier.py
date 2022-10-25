@@ -5,14 +5,15 @@ from PIL import Image
 
 class ImageClassifier:
     def __init__(self):
-        self.model = ZeroShotImageClassification()
+        pass
+        # self.model = ZeroShotImageClassification()
 
     def predict(self, image, candidate_labels=["cats", "dogs"]):
-        prediction = self.model(image=image,
-            candidate_labels=candidate_labels, 
-            )
-        return prediction
-        # return "cat" if random.random() < 0.5 else "dog"
+        return "cat" if random.random() < 0.5 else "dog"
+        # prediction = self.model(image=image,
+        #     candidate_labels=candidate_labels, 
+        #     )
+        # return prediction
 
 if __name__ == "__main__":
     image = cv2.imread("demo/dog_demo.jpeg")

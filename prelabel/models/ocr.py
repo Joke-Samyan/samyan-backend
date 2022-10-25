@@ -55,6 +55,7 @@ def match_template(image, template):
 
 class OCR:
     def __init__(self):
+        # pass
         self.custom_config = r'--oem 3 --psm 6'
 
     def predict(self, image):

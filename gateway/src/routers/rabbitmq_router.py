@@ -33,7 +33,7 @@ def read_img_from_url(url):
     image = cv2.imdecode(np.array(bytearray(url_response.read()), dtype=np.uint8), -1)
     return image
 
-def send_to_image_classifier_queue(url, file_name="dog_demo.jpeg"):
+def send_to_image_classifier_queue(url, dataset_id, entry_id, file_name="dog_demo.jpeg"):
     """
     Send an image to the image classifier queue
     """
@@ -49,13 +49,16 @@ def send_to_image_classifier_queue(url, file_name="dog_demo.jpeg"):
     channel.basic_publish(exchange="",
                           routing_key="image_classifier",
                           body=json.dumps({"image": encoded_image,
-                                           "file_name": file_name}))
+                                           "file_name": file_name,
+                                           "dataset_id": dataset_id,
+                                           "entry_id": entry_id
+                                           }))
 
     print(" [x] Sent image to image_classifier queue")
 
     connection.close()
 
-def send_to_ocr_queue(url, file_name="./demo/dog_demo.jpeg"):
+def send_to_ocr_queue(url, dataset_id, entry_id, file_name="dog_demo.jpeg"):
     """
     Send an image to the ocr queue
     """
@@ -71,7 +74,11 @@ def send_to_ocr_queue(url, file_name="./demo/dog_demo.jpeg"):
     channel.basic_publish(exchange="",
                           routing_key="ocr",
                           body=json.dumps({"image": encoded_image,
-                                           "file_name": file_name}))
+                                            "file_name": file_name,
+                                           "dataset_id": dataset_id,
+                                           "entry_id": entry_id
+                                           }))
+
 
     print(" [x] Sent image to ocr queue")
 
