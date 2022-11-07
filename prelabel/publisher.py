@@ -28,7 +28,7 @@ def send_to_image_classifier_queue(url, file_name="demo/dog_demo.jpeg"):
 
     connection.close()
 
-def send_to_ocr_queue(url, file_name="demo/dog_demo.jpeg"):
+def send_to_ocr_queue(url, dataset_id="6368892dc649a23f48fc3451", entry_id="6368892dc649a23f48fc3450"):
     """
     Send an image to the ocr queue
     """
@@ -45,7 +45,8 @@ def send_to_ocr_queue(url, file_name="demo/dog_demo.jpeg"):
     channel.basic_publish(exchange="",
                           routing_key="ocr",
                           body=json.dumps({"image": encoded_image,
-                                           "file_name": file_name}))
+                                           "dataset_id": dataset_id,
+                                           "entry_id": entry_id,}))
 
     print(" [x] Sent image to ocr queue")
 
@@ -55,7 +56,7 @@ def send_to_ocr_queue(url, file_name="demo/dog_demo.jpeg"):
 def main():
     # send_to_image_classifier_queue()
     send_to_ocr_queue("https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2@2x.png")
-
+    # send_to_ocr_queue("demo/text_demo.png")
 
 if __name__ == "__main__":
     main()

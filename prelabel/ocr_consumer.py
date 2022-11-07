@@ -6,7 +6,14 @@ import numpy as np
 from utils import decode_jpg_from_string
 
 from models.ocr import OCR
-from database import replace_dataset_by_id, find_dataset_by_id
+
+from pymongo import MongoClient
+import bson
+
+client = MongoClient("mongodb://localhost:27017/")
+db = client.kodwang
+
+dataset_collection = db.dataset
 
 # initial ocr model
 model = OCR()
@@ -22,14 +29,24 @@ def main():
     channel.queue_declare(queue="ocr")
 
     def callback(ch, method, properties, body):
-        print(" [x] Received %r" % json.loads(body)["file_name"])
+        print(" [x] Received image for %r" % json.loads(body)["dataset_id"])
         image = decode_jpg_from_string(json.loads(body)["image"])
+        prediction_result = model.predict(image)
         print("prediction result:", model.predict(image))
-        # dataset = await find_dataset_by_id(json.loads(body)["dataset_id"])
-        # print(dataset)
 
-        # cv2.imshow("image", image)
-        # cv2.waitKey(0) 
+        # update dataset
+        dataset_id = json.loads(body)["dataset_id"]
+        entry_id = json.loads(body)["entry_id"]
+        dataset = dataset_collection.find_one({"_id": bson.ObjectId(dataset_id)})
+        for idx, entry in enumerate(dataset["entries"]):
+            if entry["entry_id"] == bson.ObjectId(entry_id):
+                print("added prelabel result to entry")
+                dataset["entries"][idx]["prelabel"] = prediction_result
+        dataset_collection.update_one(
+            {"_id": bson.ObjectId(dataset_id)},
+            {"$set": {"entries": dataset["entries"]}},
+        )
+        
     
     channel.basic_consume(queue="ocr", on_message_callback=callback, auto_ack=True)
     
