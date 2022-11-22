@@ -15,4 +15,5 @@ message GetDataEntryResponse {
     string data = 2;
     string entry_id = 3;
     float reward = 4;
+    string prelabel = 5;
 }
