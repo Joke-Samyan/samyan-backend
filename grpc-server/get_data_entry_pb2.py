@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14get_data_entry.proto\x12\x08get_data\")\n\x13GetDataEntryRequest\x12\x12\n\ndataset_id\x18\x01 \x01(\t\"Y\n\x14GetDataEntryResponse\x12\x11\n\tdata_type\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\t\x12\x10\n\x08\x65ntry_id\x18\x03 \x01(\t\x12\x0e\n\x06reward\x18\x04 \x01(\x02\x32`\n\x0f\x44\x61taEntryGetter\x12M\n\x0cGetDataEntry\x12\x1d.get_data.GetDataEntryRequest\x1a\x1e.get_data.GetDataEntryResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14get_data_entry.proto\x12\x08get_data\")\n\x13GetDataEntryRequest\x12\x12\n\ndataset_id\x18\x01 \x01(\t\"k\n\x14GetDataEntryResponse\x12\x11\n\tdata_type\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\t\x12\x10\n\x08\x65ntry_id\x18\x03 \x01(\t\x12\x0e\n\x06reward\x18\x04 \x01(\x02\x12\x10\n\x08prelabel\x18\x05 \x01(\t2`\n\x0f\x44\x61taEntryGetter\x12M\n\x0cGetDataEntry\x12\x1d.get_data.GetDataEntryRequest\x1a\x1e.get_data.GetDataEntryResponseb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'get_data_entry_pb2', globals())
@@ -23,7 +23,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _GETDATAENTRYREQUEST._serialized_start=34
   _GETDATAENTRYREQUEST._serialized_end=75
   _GETDATAENTRYRESPONSE._serialized_start=77
-  _GETDATAENTRYRESPONSE._serialized_end=166
-  _DATAENTRYGETTER._serialized_start=168
-  _DATAENTRYGETTER._serialized_end=264
+  _GETDATAENTRYRESPONSE._serialized_end=184
+  _DATAENTRYGETTER._serialized_start=186
+  _DATAENTRYGETTER._serialized_end=282
 # @@protoc_insertion_point(module_scope)
