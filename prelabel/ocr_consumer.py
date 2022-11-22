@@ -10,7 +10,7 @@ from models.ocr import OCR
 from pymongo import MongoClient
 import bson
 
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://13.229.113.33:27017/")
 db = client.kodwang
 
 dataset_collection = db.dataset
@@ -23,7 +23,7 @@ def main():
     receive image from ocr queue and recognize it
     """
 
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host="localhost"))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host="35.88.133.93"))
     channel = connection.channel()
 
     channel.queue_declare(queue="ocr")
