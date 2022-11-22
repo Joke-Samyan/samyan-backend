@@ -42,10 +42,10 @@ def main():
             if entry["entry_id"] == bson.ObjectId(entry_id):
                 print("added prelabel result to entry")
                 dataset["entries"][idx]["prelabel"] = prediction_result
-        dataset_collection.update_one(
-            {"_id": bson.ObjectId(dataset_id)},
-            {"$set": {"entries": dataset["entries"]}},
-        )
+                dataset_collection.update_one(
+                    {"_id": bson.ObjectId(dataset_id)},
+                    {"$set": {"entries": dataset["entries"]}},
+                )
         
     
     channel.basic_consume(queue="ocr", on_message_callback=callback, auto_ack=True)

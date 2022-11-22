@@ -56,8 +56,8 @@ def send_to_ocr_queue(url, dataset_id, entry_id):
 def main():
     # send_to_image_classifier_queue()
     send_to_ocr_queue("https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2@2x.png",
-        dataset_id="637ccff3cb6101da31b890c4",
-        entry_id="637ccff3cb6101da31b890c3")
+        dataset_id="637d01bfcb6101da31b890d6",
+        entry_id="637d01bfcb6101da31b890d5")
     # send_to_ocr_queue("demo/text_demo.png")
 
 if __name__ == "__main__":
