@@ -41,7 +41,7 @@ def main():
         for idx, entry in enumerate(dataset["entries"]):
             if entry["entry_id"] == bson.ObjectId(entry_id):
                 print("added prelabel result to entry")
-                dataset["entries"][idx]["prelabel"] = prediction_result.strip("\n")
+                dataset["entries"][idx]["prelabel"] = prediction_result.strip("\n").strip("/n/f")
 
         dataset_collection.update_one(
             {"_id": bson.ObjectId(dataset_id)},
